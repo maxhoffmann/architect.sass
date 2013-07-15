@@ -1,0 +1,91 @@
+/**
+ * initial mixin
+ *
+ * sets the passed properties back to there initial values (as documented on MDN)
+ *
+ * Usage:
+
+ .foo
+ 	+initial(height, margin-top)
+
+ */
+
+// ----- //
+// MIXIN //
+// ----- //
+
+=initial($properties...)
+	@each $property in $properties
+
+		@if $property == background-color
+			background-color: transparent
+
+		@if $property == clear
+			clear: none
+
+		@if $property == color
+			color: inherit
+
+		@if $property == content
+			content: normal
+
+		@if $property == direction
+			direction: ltr
+
+
+		@if $property == display
+			display: inline
+
+		@if $property == float
+			float: none
+
+		@if $property == font-size
+			font-size: inherit
+
+		@if $property == font-weight
+			font-weight: normal
+
+		@if $property == height
+			height: auto
+
+		@if $property == letter-spacing
+			letter-spacing: normal
+
+		@if $property == margin-bottom
+			margin-bottom: 0
+
+		@if $property == margin-left
+			margin-left: 0
+
+		@if $property == margin-right
+			margin-right: 0
+
+		@if $property == margin-top
+			margin-top: 0
+
+		@if $property == max-width
+			max-width: none
+
+		@if $property == min-height
+			min-height: 0
+
+		@if $property == min-width
+			min-width: 0
+
+		@if $property == overflow
+			overflow: visible
+
+		@if $property == padding
+			padding: 0
+
+		@if $property == text-align
+			text-align: left
+
+		@if $property == vertical-align
+			vertical-align: baseline
+
+		@if $property == white-space
+			white-space: normal
+
+		@if $property == word-spacing
+			word-spacing: normal

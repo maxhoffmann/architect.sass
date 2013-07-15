@@ -1,0 +1,101 @@
+/**
+ * architect.sass examples
+ *
+ * @author Maximilian Hoffmann http://maximilianhoffmann.com
+ * @twitter @max_hoffmann
+ */
+
+// import architect
+@import "../_architect"
+
+body
+	margin: 0
+	font-family: sans-serif
+	+when("min-width: 401px")
+		width: 88%
+		+center-horizontally
+
+h2:first-child
+	margin-top: 0
+
+pre
+	overflow: auto
+	line-height: 1.4
+	padding: 20px
+	color: #fff
+	background-color: #000
+	font-size: 1.2em
+
+.box
+	width: 100px
+	height: 100px
+	background-color: rgba(0,0,0,.2)
+	&:nth-child(2n)
+		background-color: rgba(0,0,0,.4)
+
+.box-big
+	width: 200px
+	height: 200px
+
++when("max-width: 400px")
+	+min-viewport-height(".viewport")
+		background-color: rgba(0,0,0,.2)
+
+
+.row
+	+row('.box')
+
+.box1
+	+center('.box')
+.box2
+	+center('.box', vertically)
+.box3
+	+center('.box', horizontally)
+
+.stretch
+	+when("min-width: 500px")
+		+stretch('.box')
+			text-align: center
+			vertical-align: middle
+
+.media-left-top
+	+media(img, p)
+
+.media-left-middle
+	margin-top: 10px
+	+media(img, p, left-middle)
+
+.media-left-bottom
+	margin-top: 10px
+	+media(img, p, left-bottom)
+
+.media-right-top
+	margin-top: 10px
+	+media(img, p, right-top)
+
+.media-right-middle
+	margin-top: 10px
+	+media(img, p, right-middle)
+
+.media-right-bottom
+	margin-top: 10px
+	+media(img, p, right-bottom)
+
+.drop-cap
+	max-width: 30em
+	+center-horizontally
+	+drop-cap
+		font-size: 3em
+		font-weight: bold
+		background-color: #eee
+	+when("min-width: 600px")
+		+drop-cap-to-middle
+	+when("min-width: 800px")
+		+drop-cap-to-left
+
+
+.widget1
+	+center('.widget-title', horizontally, true)
+
+.widget2
+	+center('.widget-title', horizontally, true)

@@ -1,0 +1,77 @@
+/**
+ * (min/max)-viewport-height
+ *
+ * let child elements occupy 100% of the available width
+ *
+ * Usage:
+
+ +min-viewport-height('.full-height')
+ 	background-color: blue
+
+ */
+
+// ------ //
+// STYLES //
+// ------ //
+
+%full-height
+	height: 100%
+
+
+
+// ------ //
+// MIXINS //
+// ------ //
+
+/**
+ *
+ * SET
+ *
+ */
+
+=min-viewport-height($element, $extends: false)
+	html, body
+		@if $extends
+			+_(full-height)
+		@else
+			height: 100%
+
+	#{$element}
+		min-height: 100%
+		@content
+
+=max-viewport-height($element, $extends: false)
+	html, body
+		@if $extends
+			+_(full-height)
+		@else
+			height: 100%
+
+	#{$element}
+		@if $extends
+			+_(full-height)
+		@else
+			height: 100%
+		+border-box
+		overflow: hidden
+		@content
+
+/**
+ *
+ * UNDO
+ *
+ */
+
+=undo-min-viewport-height($element)
+	html, body
+		+initial(height)
+	#{$element}
+		+initial(min-height)
+		@content
+
+=undo-max-viewport-height($element)
+	html, body
+		+initial(height)
+	#{$element}
+		+initial(height,overflow)
+		@content

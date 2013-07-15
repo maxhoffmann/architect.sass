@@ -1,0 +1,52 @@
+/**
+ * clear
+ *
+ * centers the specified child element horizontally and/or vertically
+ *
+ * Usage:
+
+ .foo
+ 	+clear
+
+ */
+
+// ------ //
+// STYLES //
+// ------ //
+
+%clearfix
+	&:after
+		content: ' '
+		display: table
+		clear: both
+
+
+
+// ------ //
+// MIXINS //
+// ------ //
+
+/**
+ *
+ * SET
+ *
+ */
+
+=clear($extends: false)
+	@if $extends
+		+_(clearfix)
+	@else
+		&:after
+			content: ' '
+			display: table
+			clear: both
+
+/**
+ *
+ * UNDO
+ *
+ */
+
+=undo-clear
+	&:after
+		+initial(content, display, clear)

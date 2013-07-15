@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>architect.sass examples</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+</head>
+<body>
+
+    <div class="viewport">
+        <h2>stretch to viewport height</h2>
+        <pre>
++when("max-width: 400px")
+    +min-viewport-height(".viewport")
+        background-color: rgba(0,0,0,.2)
+</pre>
+    </div>
+
+    <h2>display elements horizontally in a row</h2>
+    <pre>
++row('.box')
+</pre>
+    <div class="row">
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+
+    <h2>centering with unknown dimensions</h2>
+    <pre>
+.box1
+    +center('.box')
+.box2
+    +center('.box', vertically)
+.box3
+    +center('.box', horizontally)
+</pre>
+    <div class="row">
+        <div class="box box-big box1">
+            <div class="box">child of .box1</div>
+        </div>
+        <div class="box box-big box2">
+            <div class="box">child of .box2</div>
+        </div>
+        <div class="box box-big box3">
+            <div class="box">child of .box3</div>
+        </div>
+    </div>
+
+    <h2>Stretched elements without flexbox</h2>
+    <pre>
++when("min-width: 400px")
+    +stretch('.box')
+        text-align: center
+        vertical-align: middle
+</pre>
+    <div class="stretch">
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+        <div class="box">4</div>
+    </div>
+
+    <div class="stretch">
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+        <div class="box">4</div>
+        <div class="box">5</div>
+        <div class="box">6</div>
+    </div>
+
+    <h2>Media element</h2>
+
+<pre>
+.media-left-top
+    +media(img, p)
+</pre>
+    <div class="media-left-top">
+        <img src="//placehold.it/100x100" alt="">
+        <p>left-top</p>
+    </div>
+
+<pre>
+.media-left-middle
+    margin-top: 10px
+    +media(img, p, left-middle)
+</pre>
+    <div class="media-left-middle">
+        <img src="//placehold.it/100x100" alt="">
+        <p>left-middle</p>
+    </div>
+
+<pre>
+.media-left-bottom
+    margin-top: 10px
+    +media(img, p, left-bottom)
+</pre>
+    <div class="media-left-bottom">
+        <img src="//placehold.it/100x100" alt="">
+        <p>left-bottom</p>
+    </div>
+
+<pre>
+.media-right-top
+    margin-top: 10px
+    +media(img, p, right-top)
+</pre>
+    <div class="media-right-top">
+        <img src="//placehold.it/100x100" alt="">
+        <p>right-top</p>
+    </div>
+
+<pre>
+.media-right-middle
+    margin-top: 10px
+    +media(img, p, right-middle)
+</pre>
+    <div class="media-right-middle">
+        <img src="//placehold.it/100x100" alt="">
+        <p>right-middle</p>
+    </div>
+
+<pre>
+.media-right-bottom
+    margin-top: 10px
+    +media(img, p, right-bottom)
+</pre>
+    <div class="media-right-bottom">
+        <img src="//placehold.it/100x100" alt="">
+        <p>right-bottom</p>
+    </div>
+
+    <h2>drop cap</h2>
+
+    <pre>
+max-width: 30em
++center-horizontally
++drop-cap
+    font-size: 3em
+    font-weight: bold
+    background-color: #eee
++when("min-width: 600px")
+    +drop-cap-to-middle
++when("min-width: 800px")
+    +drop-cap-to-left
+</pre>
+    <p class="drop-cap">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat, enim, cumque, eaque, vel temporibus veritatis dicta sequi deserunt voluptatem aliquid facilis deleniti porro fugit blanditiis laborum iste magni iusto modi. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, nemo voluptatibus repellat totam facilis. Accusantium, est, similique, impedit alias cumque modi error quaerat omnis tempora iusto in rem veritatis numquam!</p>
+</body>
+</html>

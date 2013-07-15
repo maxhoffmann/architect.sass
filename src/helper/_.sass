@@ -1,0 +1,18 @@
+/**
+ * _ mixin
+ *
+ * just some syntactic sugar for .sass files as there is no shorter syntax for @extend
+ *
+ * Usage:
+
+ .foo
+ 	+_(bar)
+
+ */
+
+// ----- //
+// MIXIN //
+// ----- //
+
+=_($placeholder)
+	@extend #{"%"+$placeholder}

@@ -1,0 +1,23 @@
+/**
+ * when mixin
+ *
+ * shorter syntax for media queries
+ *
+ * Usage:
+
+ .foo
+ 	+when('min-width: 40em')
+
+ */
+
+// ----- //
+// MIXIN //
+// ----- //
+
+@mixin when($condition, $medium: screen)
+	@media #{$medium} and (#{$condition})
+		@content
+
+@mixin and($condition, $medium: screen)
+	@media #{$medium} and (#{$condition})
+		@content

@@ -1,0 +1,139 @@
+/**
+ * center
+ *
+ * centers the specified child element horizontally and/or vertically
+ *
+ * Usage:
+
+ .foo
+ 	+center('.bar')
+ 		color: red
+
+ */
+
+// ------ //
+// STYLES //
+// ------ //
+
+%horizontally-centered
+	margin-left: auto
+	margin-right: auto
+
+%center-child-vertical
+	&:before
+		content: ''
+		display: inline-block
+		height: 100%
+		vertical-align: middle
+		margin-right: -0.25em // remove spacing from content: ''
+
+%center-content-vertical
+	display: inline-block
+	vertical-align: middle
+
+%center-child-horizontal
+	text-align: center
+	vertical-align: top
+
+%center-inline-block
+	display: inline-block
+
+// ----------------- //
+// HORIZONTAL MIXINS //
+// ----------------- //
+
+/**
+ *
+ * SET
+ *
+ */
+
+=center($element, $option: both, $extends: false)
+
+	// center $element horizontally
+	@if $option == horizontally
+		@if $extends
+			+_(center-child-horizontal)
+		@else
+			text-align: center
+			vertical-align: top
+
+		> #{$element}
+			@if $extends
+				+_(center-inline-block)
+			@else
+				display: inline-block
+			@content
+
+	// center $element vertically
+	@if $option == vertically
+		vertical-align: top
+
+		@if $extends
+			+_(center-child-vertical)
+		@else
+			&:before
+				content: ''
+				display: inline-block
+				height: 100%
+				vertical-align: middle
+				margin-right: -0.25em // remove spacing from content: ''
+
+		> #{$element}
+			display: inline-block
+			vertical-align: middle
+			@content
+
+	// center $element horizontally and vertically
+	@if $option == both
+		text-align: center
+		vertical-align: top
+		@if $extends
+			+_(center-child-vertical)
+		@else
+			&:before
+				content: ''
+				display: inline-block
+				height: 100%
+				vertical-align: middle
+				margin-right: -0.25em // remove spacing from content: ''
+
+		> #{$element}
+			display: inline-block
+			vertical-align: middle
+			@content
+
+=center-horizontally
+	+_(horizontally-centered)
+
+/**
+ *
+ * UNDO
+ *
+ */
+
+=undo-center($element, $option: both)
+
+	@if $option == horizontally
+		+initial(text-align)
+		> #{$element}
+			+initial(vertical-align)
+			@content
+
+	@if $option == vertically
+		&:before
+			+initial(content, height, vertical-align, margin-right)
+		> #{element}
+			+initial(vertical-align)
+			@content
+
+	@if $option == both
+		+initial(text-align)
+		&:before
+			+initial(content, height, vertical-align, margin-right, text-align)
+		> #{element}
+			+initial(vertical-align)
+			@content
+
+=undo-center-horizontally
+	+initial(margin-left, margin-right)

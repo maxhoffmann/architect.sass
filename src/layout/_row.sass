@@ -1,0 +1,46 @@
+/**
+ * row mixin
+ *
+ * stack child elements horizontally
+ *
+ * Usage:
+
+ .foo
+ 	+row('.bar')
+ 		background-color: blue
+
+ */
+
+// ----- //
+// MIXIN //
+// ----- //
+
+/**
+ *
+ * SET
+ *
+ */
+
+=row($element, $nowrap: false)
+	font-size: 0
+	@if $nowrap
+		white-space: nowrap
+
+	> #{$element}
+		font-size: 16px
+		font-size: 1rem
+		display: inline-block
+		@content
+
+/**
+ *
+ * UNDO
+ *
+ */
+
+=undo-row($element)
+	+initial(font-size, white-space)
+	> #{$element}
+		font-size: inherit
+		display: block
+		@content

@@ -1,0 +1,90 @@
+/**
+ * drop-cap
+ *
+ * styles the first letter of an element as a drop cap
+ *
+ * Usage:
+
+ .foo
+ 	+drop-cap(middle)
+ 		font-size: 3em
+
+ */
+
+// ------ //
+// STYLES //
+// ------ //
+
+%drop-cap
+	float: left
+	margin-top: .05em
+	margin-right: .28em
+	padding: .53em .45em .46em .48em
+	min-width: .74em
+	line-height: .68em
+
+
+
+// ------ //
+// MIXINS //
+// ------ //
+
+/**
+ *
+ * SET
+ *
+ */
+
+=drop-cap($position: inset, $extend: false)
+
+	@if position == inset
+		+drop-cap-to-inset
+	@if position == middle
+		+drop-cap-to-middle
+	@if position == left
+		+drop-cap-to-left
+
+	&:first-letter
+		@if $extend
+			@extend %drop-cap
+		@else
+			float: left
+			margin-top: .05em
+			margin-right: .28em
+			padding: .53em .45em .46em .48em
+			min-width: .74em
+			line-height: .68em
+
+		@content
+
+/**
+ *
+ * UNDO
+ *
+ */
+
+=undo-drop-cap
+	&:first-letter
+		+initial(float, margin-top, margin-right, margin-left, padding, min-width, line-height)
+		@content
+
+
+
+// ------ //
+// HELPER //
+// ------ //
+
+=drop-cap-to-inset
+	&:first-letter
+		margin-left: 0
+		@content
+
+=drop-cap-to-middle
+	&:first-letter
+		margin-left: -.83em
+		@content
+
+=drop-cap-to-left
+	&:first-letter
+		margin-left: -2em
+		@content

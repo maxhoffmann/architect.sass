@@ -1,0 +1,64 @@
+/**
+ * stretch
+ *
+ * let child elements occupy 100% of the available width
+ *
+ * Usage:
+
+ .foo
+ 	+stretch('.bar')
+ 		color: red
+
+ */
+
+// ----- //
+// STYLE //
+// ----- //
+
+%stretched
+	display: table
+	width: 100%
+
+%stretched-children
+	display: table-cell
+
+
+
+// ------ //
+// MIXINS //
+// ------ //
+
+/**
+ *
+ * SET
+ *
+ */
+
+=stretch($elements, $extends: false)
+	@if $extends
+		+_(stretched)
+	@else
+		display: table
+		width: 100%
+
+	> #{$elements}
+		@if $extends
+			+_(stretched-children)
+		@else
+			display: table-cell
+
+		@content
+
+/**
+ *
+ * UNDO
+ *
+ */
+
+=undo-stretch($elements)
+	display: block
+	+initial(width)
+
+	> #{$elements}
+		display: block
+		@content

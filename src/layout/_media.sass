@@ -1,0 +1,173 @@
+/**
+ * media mixin
+ *
+ * place an image and text side by side
+ *
+ * thanks to @stubbornella and @csswizardry
+ *
+ * Usage:
+
+ .foo
+ 	+media('.media-img', '.media-body')
+
+ *
+ */
+// ------ //
+// STYLES //
+// ------ //
+
+%media
+	display: block
+	+_(clearfix)
+
+%media-body
+	overflow: hidden
+
+%media-img-left-top
+	float: left
+
+%media-img-right-top
+	float: right
+
+%flag
+	display: table
+	width: 100%
+
+%flag-image
+	display: table-cell
+
+%flag-img
+	display: block
+	max-width: none
+
+%flag-body
+	display: table-cell
+	width: 100%
+
+
+// ------ //
+// MIXINS //
+// ------ //
+
+/**
+ *
+ * SET
+ *
+ */
+
+=media($img, $body, $position: left-top, $extends: false)
+
+	@if $position == left-top or $position == right-top
+		@if $extends
+			+_(media)
+		@else
+			display: block
+			&:after
+				content: ' '
+				display: table
+				clear: both
+
+	@if $position != left-top and $position != right-top
+		@if $extends
+			+_(flag)
+		@else
+			display: table
+			width: 100%
+
+	@if $position == right-middle or $position == right-bottom
+		direction: rtl
+
+	> #{$img}
+		@if $position == left-top
+
+			@if $extends
+				+_(media-img-left-top)
+			@else
+				float: left
+
+		@if $position == right-top
+
+			@if $extends
+				+_(media-img-right-top)
+			@else
+				float: right
+
+		@if $position != left-top and $position != right-top
+			@if $extends
+				+_(flag-image)
+			@else
+				display: table-cell
+
+			> img
+				vertical-align: middle
+
+				@if $extends
+					+_(flag-img)
+				@else
+					display: block
+					max-width: none
+
+
+	> #{$body}
+
+		@if $position == left-top or $position == right-top
+
+			@if $extends
+				+_(media-body)
+			@else
+				overflow: hidden
+
+			@if $position == right-top
+				text-align: right
+
+		@else
+
+			@if $extends
+				+_(flag-body)
+			@else
+				display: table-cell
+				width: 100%
+
+			@if $position == right-middle or $position == left-middle
+				vertical-align: middle
+			@if $position == right-bottom or $position == left-bottom
+				vertical-align: bottom
+
+/**
+ *
+ * UNDO
+ *
+ */
+
+=undo-media($img, $body, $position)
+	@if $position == left-top or $position == right-top
+		display: block
+		&:after
+			+initial(content, display, clear)
+
+	@if $position != left-top and $position != right-top
+		display: block
+		+initial(width)
+
+	@if $position == right-middle or $position == right-bottom
+		+initial(direction)
+
+	> #{$img}
+		@if $position == left-top or right-top
+			+initial(float)
+
+		@if $position != left-top and $position != right-top
+			display: inline-block
+
+			> img
+				display: inline-block
+				+initial(vertical-align)
+
+	> #{$body}
+
+		@if $position == left-top or $position == right-top
+			+initial(overflow)
+
+		@else
+			display: block
+			+initial(width, vertical-align)

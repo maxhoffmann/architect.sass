@@ -1,0 +1,47 @@
+/**
+ * center-horizontally
+ *
+ * centers the element horizontally inside its parent
+ *
+ * Usage:
+
+ .foo
+ 	+center-horizontally
+
+ */
+
+// ------ //
+// STYLES //
+// ------ //
+
+%center-horizontally
+	margin-left: auto
+	margin-right: auto
+
+
+
+// ------ //
+// MIXINS //
+// ------ //
+
+/**
+ *
+ * IS horizontally centered
+ *
+ */
+
+=center-horizontally($extends: false)
+	@if $extends
+		+_(center-horizontally)
+	@else
+		margin-left: auto
+		margin-right: auto
+
+/**
+ *
+ * NO horizontally centered
+ *
+ */
+
+=undo-center-horizontally
+	+initial(margin-left, margin-right)
