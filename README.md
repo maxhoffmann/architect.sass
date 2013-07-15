@@ -1,7 +1,7 @@
 architect.sass
 ==============
 
-architect.sass is a sass mixin library which aims to abstract the positioning elements. It doesn’t add any classes to the compiled CSS and uses when-set-undo-mixins for easier responsive styling.
+architect.sass is a sass mixin library which aims to abstract the positioning of elements. It doesn’t add any classes to the compiled CSS and uses when-undo-mixins for easier responsive styling.
 
 HOW DOES IT WORK?
 -----------------
